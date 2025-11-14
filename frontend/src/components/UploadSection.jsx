@@ -38,6 +38,10 @@ function UploadSection() {
     <div className="upload-box">
       <h3>Upload Your CSV File</h3>
       <input type="file" accept=".csv" onChange={handleFileChange} />
+      <p className="note">
+        Required columns (in order): Bill_ID, Billing_Month, Billing_Year,
+        Units_Consumed_kWh, Total_Amount, Payment_Status
+      </p>
       <button onClick={handleUpload}>Upload</button>
       {message && <p className="message">{message}</p>}
     </div>

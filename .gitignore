@@ -1,3 +1,13 @@
+# Environment and Config
+.env
+.flaskenv
+*.local
+
+# Dependencies and Build Artifacts
+node_modules
+dist
+dist-ssr
+
 # Logs
 logs
 *.log
@@ -7,20 +17,30 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+Pipfile.lock
+poetry.lock
 
-# Editor directories and files
+# Generated/Sensitive Data Files
+data/
+/backend/data/bills.csv
+/backend/forecast/forecast.json
+/backend/forecast/forecast_plot.png
+
+# IDE and System Files
+.DS_Store
+Thumbs.db
+.idea
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-.env

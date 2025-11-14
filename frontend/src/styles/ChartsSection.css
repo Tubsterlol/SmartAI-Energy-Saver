@@ -1,0 +1,52 @@
+.charts-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.charts-controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.charts-controls select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.charts-controls button {
+  margin-left: 12px;
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.charts-controls button:hover:enabled {
+  background-color: #3b7ccc;
+}
+
+.charts-controls button:disabled {
+  background-color: #a0c4f2;
+  cursor: not-allowed;
+}
+
+.forecast-output {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.forecast-output img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

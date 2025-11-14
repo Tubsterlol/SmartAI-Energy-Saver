@@ -10,6 +10,5 @@ def calculate_co2(df_or_path):
     else:
         df = df_or_path
 
-    # Example processing
     df['CO2_kg'] = df['kWh'] * 0.233
     return df.to_dict(orient='records')
