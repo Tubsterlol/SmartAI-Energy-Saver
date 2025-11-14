@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import UploadSection from "../components/UploadSection";
 import ChartsSection from "../components/ChartsSection";
 import TipsSection from "../components/TipsSection";
+import DashboardOverview from "../components/DashboardOverview";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
@@ -19,7 +20,7 @@ function Dashboard() {
         />
 
         <main className="dashboard-content">
-          {activeSection === "overview" && <h2>Dashboard Overview</h2>}
+          {activeSection === "overview" && <DashboardOverview />}
           {activeSection === "upload" && <UploadSection />}
           {activeSection === "insights" && <h2>Insights</h2>}
           {activeSection === "charts" && <ChartsSection />}
