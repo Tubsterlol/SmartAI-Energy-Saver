@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import UploadSection from "../components/UploadSection";
 import ChartsSection from "../components/ChartsSection";
+import TipsSection from "../components/TipsSection";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
@@ -22,8 +23,7 @@ function Dashboard() {
           {activeSection === "upload" && <UploadSection />}
           {activeSection === "insights" && <h2>Insights</h2>}
           {activeSection === "charts" && <ChartsSection />}
-          {activeSection === "forecast" && <h2>Forecast</h2>}
-          {activeSection === "tips" && <h2>Green Tips</h2>}
+          {activeSection === "tips" && <TipsSection />}
           {activeSection === "about" && <h2>About SmartAI</h2>}
         </main>
       </div>

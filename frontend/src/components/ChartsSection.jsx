@@ -25,6 +25,7 @@ export default function ChartsSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ filename: selectedFile }),
       });
+
       const data = await res.json();
       setForecast(data);
       setPlotUrl(`${API_URL}/forecast_plot.png?${Date.now()}`);
@@ -38,33 +39,36 @@ export default function ChartsSection() {
     <div className="charts-container">
       <h2>Charts</h2>
 
-      <div className="charts-controls">
-        <select
-          value={selectedFile}
-          onChange={(e) => setSelectedFile(e.target.value)}
-        >
-          <option value="">Select CSV File</option>
-          {files.map((f) => (
-            <option key={f} value={f}>
-              {f}
-            </option>
-          ))}
-        </select>
+      {/* Upload-style card wrapper */}
+      <div className="charts-box">
+        <div className="charts-controls">
+          <select
+            value={selectedFile}
+            onChange={(e) => setSelectedFile(e.target.value)}
+          >
+            <option value="">Select CSV File</option>
+            {files.map((f) => (
+              <option key={f} value={f}>
+                {f}
+              </option>
+            ))}
+          </select>
 
-        <button onClick={runModel} disabled={loading || !selectedFile}>
-          {loading ? "Running..." : "Run Model"}
-        </button>
+          <button onClick={runModel} disabled={loading || !selectedFile}>
+            {loading ? "Running..." : "Run Model"}
+          </button>
+        </div>
       </div>
 
       {forecast && (
-        <div className="forecast-output">
+        <div className="forecast-box">
           <p>Predicted Usage: {forecast.predicted_usage_kWh} kWh</p>
           <p>Predicted Bill: ₹{forecast.predicted_bill_inr}</p>
         </div>
       )}
 
       {plotUrl && (
-        <div className="forecast-output">
+        <div className="forecast-box">
           <img src={plotUrl} alt="Forecast Plot" />
         </div>
       )}
