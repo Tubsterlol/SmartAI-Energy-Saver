@@ -64,6 +64,9 @@ export default function ChartsSection() {
         <div className="forecast-box">
           <p>Predicted Usage: {forecast.predicted_usage_kWh} kWh</p>
           <p>Predicted Bill: ₹{forecast.predicted_bill_inr}</p>
+          <p>MAE: {forecast.mae}</p>
+          <p>R2 Score: {forecast.r2}</p>
+          
         </div>
       )}
 

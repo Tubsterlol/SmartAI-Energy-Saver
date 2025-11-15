@@ -23,7 +23,7 @@ function Dashboard() {
           {activeSection === "overview" && <DashboardOverview />}
           {activeSection === "upload" && <UploadSection />}
           {activeSection === "insights" && <h2>Insights</h2>}
-          {activeSection === "charts" && <ChartsSection />}
+          {activeSection === "prediction" && <ChartsSection />}
           {activeSection === "tips" && <TipsSection />}
           {activeSection === "about" && <h2>About SmartAI</h2>}
         </main>

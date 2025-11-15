@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Sidebar.css";
 
 function Sidebar({ activeSection, setActiveSection }) {
-  const sections = ["overview", "upload", "insights", "Predictions", "tips", "about"];
+  const sections = ["overview", "upload", "insights", "prediction", "tips", "about"];
 
   return (
     <aside className="sidebar">

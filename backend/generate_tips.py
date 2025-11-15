@@ -33,10 +33,40 @@ def run_tips(csv_path):
 
     classes = ["Low", "Medium", "High"]
 
+    # ⭐ EXPANDED TIP LISTS ⭐
     tips_map = {
-        0: ["Your usage is low. Keep conserving energy.", "Turn off appliances when not in use."],
-        1: ["Your usage is stable.", "Switch to LED bulbs."],
-        2: ["High usage detected.", "Check AC filters and heavy appliances."]
+        0: [
+            "Your usage is low — great job conserving energy!",
+            "Turn off appliances completely instead of leaving them in standby mode.",
+            "Use natural daylight whenever possible instead of electric lights.",
+            "Unplug chargers when not in use — they consume power even idle.",
+            "Keep your fans clean to maintain efficiency.",
+            "Monitor how often appliances run — avoid unnecessary usage.",
+            "Consider using a smart power strip to reduce phantom load.",
+            "Maintain this pattern to achieve a higher Green Score next month."
+        ],
+
+        1: [
+            "Your usage is stable — you can still reduce it with small changes.",
+            "Switch to LED bulbs to reduce lighting consumption by 50–70%.",
+            "Use energy-efficient fans or appliances where possible.",
+            "Run washing machines and dishwashers on full loads only.",
+            "Turn off lights & fans when leaving rooms to avoid waste.",
+            "Maintain AC temperature at 24–26°C for optimal efficiency.",
+            "Keep your fridge tightly sealed; check rubber lining.",
+            "Try reducing peak-hour heavy appliance usage."
+        ],
+
+        2: [
+            "High usage detected — consider reducing heavy appliance usage.",
+            "Clean AC filters regularly — clogged filters waste energy.",
+            "Avoid using high-power devices (geyser, heater, iron) unnecessarily.",
+            "Check for faulty appliances that may be consuming extra energy.",
+            "Use energy-efficient appliances (5-star rated) to cut power costs.",
+            "Unplug idle appliances to reduce phantom energy loss.",
+            "Shift washing machine / geyser use to off-peak hours.",
+            "Review your monthly increase — there may be a spike due to AC or fridge."
+        ]
     }
 
     out = {
