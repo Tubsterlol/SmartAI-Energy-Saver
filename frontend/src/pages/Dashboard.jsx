@@ -5,6 +5,7 @@ import UploadSection from "../components/UploadSection";
 import ChartsSection from "../components/ChartsSection";
 import TipsSection from "../components/TipsSection";
 import DashboardOverview from "../components/DashboardOverview";
+import CO2Section from "../components/CO2Tracker";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
@@ -22,7 +23,7 @@ function Dashboard() {
         <main className="dashboard-content">
           {activeSection === "overview" && <DashboardOverview />}
           {activeSection === "upload" && <UploadSection />}
-          {activeSection === "insights" && <h2>Insights</h2>}
+          {activeSection === "co2-tracker" && <CO2Section />}
           {activeSection === "prediction" && <ChartsSection />}
           {activeSection === "tips" && <TipsSection />}
           {activeSection === "about" && <h2>About SmartAI</h2>}

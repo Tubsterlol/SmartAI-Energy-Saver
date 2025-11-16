@@ -3,15 +3,21 @@ from flask_cors import CORS
 import os
 
 from forecast_model import run_forecast
-from generate_tips import run_tips
+from generate_tips import run_tips as generate_tips_func
+from co2_tracker import generate_co2_plot
 
+# Serve React build folder
 app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
 CORS(app)
 
+# Folder where uploaded CSVs will be stored
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "data")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
+# ---------------------------
+# FILE UPLOAD
+# ---------------------------
 @app.route("/upload", methods=["POST"])
 def upload_file():
     if "file" not in request.files:
@@ -27,12 +33,18 @@ def upload_file():
     return jsonify({"message": "File uploaded successfully!"})
 
 
+# ---------------------------
+# LIST CSV FILES
+# ---------------------------
 @app.route("/csv-files", methods=["GET"])
 def list_files():
     files = [f for f in os.listdir(UPLOAD_FOLDER) if f.endswith(".csv")]
     return jsonify(files)
 
 
+# ---------------------------
+# FORECAST API
+# ---------------------------
 @app.route("/run-forecast", methods=["POST"])
 def run_forecast_api():
     data = request.get_json()
@@ -49,21 +61,31 @@ def run_forecast_api():
     return jsonify(result)
 
 
+# Serve forecast image
 @app.route("/forecast_plot.png")
 def serve_plot():
     forecast_dir = os.path.join(os.path.dirname(__file__), "forecast")
     return send_from_directory(forecast_dir, "forecast_plot.png")
 
 
+# ---------------------------
+# SERVE REACT FRONTEND
+# ---------------------------
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve_react(path):
+    # If file exists, serve it
     if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
+    # Otherwise serve index.html
     return send_from_directory(app.static_folder, "index.html")
 
+
+# ---------------------------
+# ENERGY SAVING TIPS
+# ---------------------------
 @app.route("/run-tips", methods=["POST"])
-def run_tips():
+def run_tips_api():
     data = request.get_json()
     filename = data.get("filename")
 
@@ -74,17 +96,44 @@ def run_tips():
     if not os.path.exists(csv_path):
         return jsonify({"error": "File does not exist"}), 400
 
-    from generate_tips import run_tips
-    result = run_tips(csv_path)
+    # run tips using renamed imported function
+    result = generate_tips_func(csv_path)
     return jsonify(result)
 
+
+# Serve decision tree image
 @app.route("/tips_plot.png")
 def tips_plot():
     forecast_dir = os.path.join(os.path.dirname(__file__), "forecast")
     return send_from_directory(forecast_dir, "tips_tree.png")
 
 
+# ---------------------------
+# CO₂ TRACKER API
+# ---------------------------
+@app.route("/co2-plot", methods=["POST"])
+def co2_plot_api():
+    data = request.json
+    filename = data.get("filename")
+
+    try:
+        output = generate_co2_plot(filename)
+        return jsonify({
+            "status": "success",
+            "image": output
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+
+@app.route("/co2_plot.png")
+def serve_co2_plot():
+    forecast_dir = os.path.join(os.path.dirname(__file__), "forecast")
+    return send_from_directory(forecast_dir, "co2_plot.png")
 
 
+
+# ---------------------------
+# START SERVER
+# ---------------------------
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
