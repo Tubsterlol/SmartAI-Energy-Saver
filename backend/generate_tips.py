@@ -33,7 +33,6 @@ def run_tips(csv_path):
 
     classes = ["Low", "Medium", "High"]
 
-    # ⭐ EXPANDED TIP LISTS ⭐
     tips_map = {
         0: [
             "Your usage is low — great job conserving energy!",
