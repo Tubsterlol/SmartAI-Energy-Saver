@@ -61,10 +61,24 @@ def run_forecast_api():
     return jsonify(result)
 
 
+# Serve forecast image
 @app.route("/forecast_plot.png")
 def serve_plot():
     forecast_dir = os.path.join(os.path.dirname(__file__), "forecast")
     return send_from_directory(forecast_dir, "forecast_plot.png")
+
+
+# ---------------------------
+# SERVE REACT FRONTEND
+# ---------------------------
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_react(path):
+    # If file exists, serve it
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    # Otherwise serve index.html
+    return send_from_directory(app.static_folder, "index.html")
 
 
 # ---------------------------
@@ -82,10 +96,12 @@ def run_tips_api():
     if not os.path.exists(csv_path):
         return jsonify({"error": "File does not exist"}), 400
 
+    # run tips using renamed imported function
     result = generate_tips_func(csv_path)
     return jsonify(result)
 
 
+# Serve decision tree image
 @app.route("/tips_plot.png")
 def tips_plot():
     forecast_dir = os.path.join(os.path.dirname(__file__), "forecast")
@@ -93,7 +109,7 @@ def tips_plot():
 
 
 # ---------------------------
-# CO₂ LINEAR REGRESSION PLOT
+# CO₂ TRACKER API
 # ---------------------------
 @app.route("/co2-plot", methods=["POST"])
 def co2_plot_api():
@@ -109,44 +125,11 @@ def co2_plot_api():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 400
 
-
 @app.route("/co2_plot.png")
 def serve_co2_plot():
     forecast_dir = os.path.join(os.path.dirname(__file__), "forecast")
     return send_from_directory(forecast_dir, "co2_plot.png")
 
-
-# ---------------------------
-# ABOUT (STATIC DATA FOR FRONTEND)
-# ---------------------------
-@app.route("/about-info", methods=["GET"])
-def about_info():
-    return jsonify({
-        "appName": "SmartAI Energy Saver",
-        "version": "1.0",
-        "description": "SmartAI Energy Saver analyzes electricity usage, predicts future consumption, calculates CO₂ impact, and offers personalized energy-saving recommendations using machine learning and data analytics.",
-        "features": [
-            "Electricity Bill Forecasting",
-            "CO₂ Emission Tracking & Trends",
-            "Smart Energy-Saving Tips",
-            "Bill Upload & Auto-Cleaning",
-            "Interactive Charts & Visuals"
-        ]
-    })
-
-
-# ---------------------------
-# SERVE REACT FRONTEND
-# ---------------------------
-@app.route("/", defaults={"path": ""})
-@app.route("/about")
-def serve_react(path):
-    full_path = os.path.join(app.static_folder, path)
-
-    if path != "" and os.path.exists(full_path):
-        return send_from_directory(app.static_folder, path)
-
-    return send_from_directory(app.static_folder, "index.html")
 
 
 # ---------------------------
