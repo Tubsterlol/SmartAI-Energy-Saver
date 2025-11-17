@@ -6,6 +6,7 @@ import ChartsSection from "../components/ChartsSection";
 import TipsSection from "../components/TipsSection";
 import DashboardOverview from "../components/DashboardOverview";
 import CO2Section from "../components/CO2Tracker";
+import AboutSection from "../components/AboutSection";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
@@ -26,7 +27,7 @@ function Dashboard() {
           {activeSection === "co2-tracker" && <CO2Section />}
           {activeSection === "prediction" && <ChartsSection />}
           {activeSection === "tips" && <TipsSection />}
-          {activeSection === "about" && <h2>About SmartAI</h2>}
+          {activeSection === "about" && <AboutSection />}
         </main>
       </div>
     </div>

@@ -1,0 +1,24 @@
+.about-box {
+  width: 75%;
+  margin: 40px auto;
+  background: #f2e8cf;
+  padding: 35px;
+  border-radius: 14px;
+  border: 1px solid #d9e2f1;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.about-box h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2d3436;
+}
+
+.about-box p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
